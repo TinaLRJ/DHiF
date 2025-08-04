@@ -6,7 +6,7 @@ from model.ISNet.network import Resnet
 from torch.nn.parameter import Parameter
 from model.ISNet.DCNv2.TTOA import TTOA
 from utils import *
-from model.basic import SDifferenceConv, DyfConv, RepConv
+from model.basic import SDifferenceConv, DHiF, RepConv
 from model.convs.APConv import PConv
 from model.convs.FDConv_initialversion import FDConv
 from model.wtconv.wtconv2d import WTConv2d
@@ -58,11 +58,11 @@ class ResidualBlock(nn.Module):
         out = F.relu(x+residual, True)
         return out
 
-class ResidualBlock_Dyf(nn.Module):
+class ResidualBlock_DHiF(nn.Module):
     def __init__(self, in_channels, out_channels, stride, downsample):
-        super(ResidualBlock_Dyf, self).__init__()
+        super(ResidualBlock_DHiF, self).__init__()
         self.body = nn.Sequential(
-            DyfConv(in_channels, out_channels, kernel_size=3, stride=stride, padding=1, bias=False),
+            DHiF(in_channels, out_channels, kernel_size=3, stride=stride, padding=1, bias=False),
             nn.BatchNorm2d(out_channels),
             nn.ReLU(True),
 
@@ -308,8 +308,8 @@ class ISNet(nn.Module):
         stem_width = int(channels[0])
         if conv == 'usual':
             conv_in_stem = nn.Conv2d(stem_width, stem_width, 3, 1, 1, bias=False)
-        elif conv == 'Dyf':
-            conv_in_stem = DyfConv(stem_width, stem_width, 3, 1, 1, bias=False)
+        elif conv == 'DHiF':
+            conv_in_stem = DHiF(stem_width, stem_width, 3, 1, 1, bias=False)
         elif conv == 'WTC':
             conv_in_stem = WTConv2d(stem_width, stem_width, 3, 1, bias=False)
         elif conv == 'SDC':
@@ -344,8 +344,8 @@ class ISNet(nn.Module):
             self.layer2 = self._make_layer(block=ResidualBlock, block_num=layer_blocks[1],
                                            in_channels=channels[1], out_channels=channels[2], stride=2)
         else:
-            if conv == 'Dyf':
-                block_D = ResidualBlock_Dyf
+            if conv == 'DHiF':
+                block_D = ResidualBlock_DHiF
             elif conv == 'WTC':
                 block_D = ResidualBlock_WT
             elif conv == 'SDC':
