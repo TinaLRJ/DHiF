@@ -5,14 +5,9 @@ from model.DNANet.model_DNANet import DNANet
 from model.ISNet.model_ISNet import ISNet
 from model.RISTDnet.model_RISTDnet import RISTDnet
 from model.MSHNet.MSHNet import MSHNet
-from model.UIUNet.model_UIUNet import UIUNET as UIUNet
-from model.ISTDUNet.model_ISTDUNet import ISTDU_Net
 from model.RDIAN.model_RDIAN import RDIAN
 from model.ILNet.ilnet import ILNet_M as ILNet
-# from model.IAANet import IAANet
 from model.MTU_Net.MTU_Net import res_UNet as MTUNet
 import model.SCTransNet.Config as config
 from model.SCTransNet.SCTransNet import SCTransNet
-from model.IRGraphormer.IRGraphormer import IRGraphormer
 from model.APTNet import APTNet
-# from model.mim_network import MiM
