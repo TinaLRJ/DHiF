@@ -13,7 +13,7 @@ parser = argparse.ArgumentParser(description="PyTorch BasicIRSTD test") # ['ACM'
 parser.add_argument("--model_names", default=['DNANet'], type=list,
                     help="model_name: 'ACM', 'ALCNet', 'DNANet', 'ISNet', 'UIUNet', 'RDIAN', 'ISTDU-Net', 'U-Net', "
                          "'RISTDnet', 'SCTransNet', 'MTU', 'MSH', 'RPCANet', 'APT', 'ILNet', 'MAF', 'DCANet', 'IRGraphormer' ")
-parser.add_argument("--conv", default='usual', type=str, help="convolution types: usual, Dyf, WTC, SDC, PC, FD, Ref")
+parser.add_argument("--conv", default='usual', type=str, help="convolution types: usual, DHiF, WTC, SDC, PC, FD, Ref")
 parser.add_argument("--pth_dirs", default=None, type=list, help="log dir, default=None")
 parser.add_argument("--dataset_dir", default='./dataset', type=str, help="train_dataset_dir")
 parser.add_argument("--train_dataset_name", default='IRSTD-1K', type=str, help="train_dataset_name")

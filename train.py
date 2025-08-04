@@ -15,9 +15,9 @@ parser = argparse.ArgumentParser(description="PyTorch BasicIRSTD train")
 parser.add_argument("--model_names", default=['MTU'], type=list,
                     help="model_name: 'ACM', 'ALCNet', 'DNANet', 'ISNet', 'UIUNet', 'RDIAN', 'ISTDU-Net', 'U-Net', "
                          "'RISTDnet', 'SCTransNet', 'MTU', 'MSH', 'RPCANet', 'APT', 'ILNet', 'MAF', 'DCANet', 'IRGraphormer' ")
-parser.add_argument("--conv", default='Dyf', type=str, help="convolution types: usual, Dyf, WTC, SDC, PC, FD, Ref")
+parser.add_argument("--conv", default='DHiF', type=str, help="convolution types: usual, DHiF, WTC, SDC, PC, FD, Ref")
 parser.add_argument("--dataset_names", default=['NUAA-SIRST'], type=list,
-                    help="dataset_name: 'NUAA-SIRST', 'NUDT-SIRST', 'IRSTD-1K', 'SIRST3', 'NUDT-SIRST-Sea'")
+                    help="dataset_name: 'NUAA-SIRST', 'IRSTD-1K', 'SIRST3', 'NUDT-SIRST-Sea'")
 parser.add_argument("--img_norm_cfg", default=None, type=dict,
                     help="specific a img_norm_cfg, default=None (using img_norm_cfg values of each dataset)")
 
