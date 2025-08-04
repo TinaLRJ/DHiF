@@ -5,7 +5,7 @@ from torch import nn
 import torch
 import torch.nn.functional as F
 from thop import profile, clever_format
-from model.basic import SDifferenceConv, DyfConv, RepConv
+from model.basic import SDifferenceConv, DHiF, RepConv
 from model.convs.APConv import PConv
 from model.convs.FDConv_initialversion import FDConv
 from model.wtconv.wtconv2d import WTConv2d
@@ -84,10 +84,10 @@ class ResNet(nn.Module):
         return out
 
 
-class ResNet_Dyf(nn.Module):
+class ResNet_DHiF(nn.Module):
     def __init__(self, in_channels, out_channels, stride=1):
-        super(ResNet_Dyf, self).__init__()
-        self.conv1 = DyfConv(in_channels, out_channels, kernel_size=3, stride=stride, padding=1)
+        super(ResNet_DHiF, self).__init__()
+        self.conv1 = DHiF(in_channels, out_channels, kernel_size=3, stride=stride, padding=1)
         self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size=3, padding=1)
         self.bn1 = nn.BatchNorm2d(out_channels)
         self.relu = nn.GELU()
@@ -554,8 +554,8 @@ class APTNet(nn.Module):
             self.encoder_2 = self._make_layer(param_channels[1], param_channels[2], block, param_blocks[2])  # MresNet×2
             self.encoder_3 = self._make_layer(param_channels[2], param_channels[3], block, param_blocks[3])  # MresNet×2
         else:
-            if conv == 'Dyf':
-                block_D = ResNet_Dyf
+            if conv == 'DHiF':
+                block_D = ResNet_DHiF
             elif conv == 'WTC':
                 block_D = ResNet_WT
             elif conv == 'SDC':

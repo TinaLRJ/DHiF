@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 #############################################
 from .fusion import *
-from model.basic import DyfConv
+from model.basic import DHiF
 ##################################################
 
 class REBNCONV(nn.Module):
@@ -25,7 +25,7 @@ class REBNCONV_D(nn.Module):
     def __init__(self,in_ch=3,out_ch=3,dirate=1):
         super(REBNCONV_D,self).__init__()
 
-        self.conv_s1 = DyfConv(in_ch,out_ch,3,padding=1*dirate,dilation=1*dirate)
+        self.conv_s1 = DHiF(in_ch,out_ch,3,padding=1*dirate,dilation=1*dirate)
         self.bn_s1 = nn.BatchNorm2d(out_ch)
         self.relu_s1 = nn.ReLU(inplace=True)
 

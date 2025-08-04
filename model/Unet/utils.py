@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.utils.data
 import torch
-from model.basic import SDifferenceConv, DualConv_FC_light, DualConv_FC_tanh, DyfConv, FCConv
+from model.basic import SDifferenceConv, DualConv_FC_light, DualConv_FC_tanh, DHiF, FCConv
 
 
 class conv_block(nn.Module):
@@ -35,7 +35,7 @@ class conv_block_D(nn.Module):
         super(conv_block_D, self).__init__()
 
         self.conv = nn.Sequential(
-            DyfConv(in_ch, out_ch, kernel_size=3, stride=1, padding=1, bias=True),
+            DHiF(in_ch, out_ch, kernel_size=3, stride=1, padding=1, bias=True),
             nn.BatchNorm2d(out_ch),
             nn.ReLU(inplace=True),
             nn.Conv2d(out_ch, out_ch, kernel_size=3, stride=1, padding=1, bias=True),

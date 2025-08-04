@@ -59,9 +59,9 @@ class SDifferenceConv(nn.Module):
 
 
 
-class DyfConv(nn.Module):
+class DHiF(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros'):
-        super(DyfConv, self).__init__()
+        super(DHiF, self).__init__()
         self.kernel_s_ope = kernel_size
         self.ope_channels = self.kernel_s_ope*self.kernel_s_ope  # kernel_size*kernel_size
         self.operator_conv = nn.Sequential(nn.Linear(self.ope_channels, self.ope_channels*self.ope_channels), nn.Tanh())
