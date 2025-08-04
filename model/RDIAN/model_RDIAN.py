@@ -4,7 +4,7 @@ import torch.nn.functional as F
 
 from .cbam import *
 from .direction import *
-from model.basic import DualConv_FC_light, DyfConv
+from model.basic import DHiF
 from model.wtconv.wtconv2d import WTConv2d
 
 class _FCNHead(nn.Module):
@@ -47,9 +47,9 @@ class NewBlock_D(nn.Module):
         super(NewBlock_D, self).__init__()
         reduced_channels = int(in_channels/2)
         # self.layer1 = conv_batch(in_channels, reduced_channels, kernel_size=kernel_size, padding=padding, stride=stride)
-        self.layer1 = DyfConv(in_channels, reduced_channels, kernel_size=kernel_size, padding=padding, stride=stride)
+        self.layer1 = DHiF(in_channels, reduced_channels, kernel_size=kernel_size, padding=padding, stride=stride)
         self.layer2 = conv_batch(reduced_channels, in_channels, kernel_size=kernel_size, padding=padding, stride=stride)
-        # self.layer2 = DyfConv(reduced_channels, in_channels, kernel_size=kernel_size, padding=padding, stride=stride)
+        # self.layer2 = DHiF(reduced_channels, in_channels, kernel_size=kernel_size, padding=padding, stride=stride)
 
     def forward(self, x):
         residual = x
@@ -65,7 +65,7 @@ class RDIAN(nn.Module):
         accumulate_params = "none"
         self.conv1 = conv_batch(1, 16)
         self.conv2 = conv_batch(16, 32, stride=2)
-        if conv == 'Dyf':
+        if conv == 'DHiF':
             self.residual_block0 = self.make_layer(NewBlock, in_channels=32, num_blocks=1, kernel_size=1,padding=0,stride=1)
             self.residual_block1 = self.make_layer(NewBlock_D, in_channels=32, num_blocks=2, kernel_size=3,padding=1,stride=1)
             self.residual_block2 = self.make_layer(NewBlock_D, in_channels=32, num_blocks=2, kernel_size=5,padding=2,stride=1)
