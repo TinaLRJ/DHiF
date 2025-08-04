@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from model.basic import SDifferenceConv, DyfConv, RepConv
+from model.basic import SDifferenceConv, DHiF, RepConv
 from model.convs.APConv import PConv
 from model.convs.FDConv_initialversion import FDConv
 from model.wtconv.wtconv2d import WTConv2d
@@ -58,10 +58,10 @@ class SpatialAttention(nn.Module):
         x = self.conv1(x)
         return self.sigmoid(x)
 
-class Res_CBAM_block_Dyf(nn.Module):
+class Res_CBAM_block_DHiF(nn.Module):
     def __init__(self, in_channels, out_channels, stride=1):
-        super(Res_CBAM_block_Dyf, self).__init__()
-        self.conv1 = DyfConv(in_channels, out_channels, kernel_size=3, stride=stride, padding=1) ###
+        super(Res_CBAM_block_DHiF, self).__init__()
+        self.conv1 = DHiF(in_channels, out_channels, kernel_size=3, stride=stride, padding=1) ###
         self.bn1 = nn.BatchNorm2d(out_channels)
         self.relu = nn.ReLU(inplace = True)
         self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size=3, padding=1)
@@ -343,8 +343,8 @@ class DNANet(nn.Module):
             self.conv2_0 = self._make_layer(block, nb_filter[1],  nb_filter[2], num_blocks[1])
             self.conv3_0 = self._make_layer(block, nb_filter[2],  nb_filter[3], num_blocks[2])
         else:
-            if conv == 'Dyf':
-                block_D = Res_CBAM_block_Dyf
+            if conv == 'DHiF':
+                block_D = Res_CBAM_block_DHiF
             elif conv == 'WTC':
                 block_D = Res_CBAM_block_WT
             elif conv == 'SDC':

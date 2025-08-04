@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from math import log, ceil, floor
-from model.basic import SDifferenceConv, DyfConv
+from model.basic import SDifferenceConv, DHiF
 from model.wtconv.wtconv2d import WTConv2d
 
 
@@ -23,12 +23,12 @@ class ConvBNReLU(nn.Module):
 
 class ConvBNReLU_D(nn.Module):
 
-    def __init__(self, in_ch: int, out_ch: int, kernel_size: int = 3, dilation: int = 1, conv: str = 'Dyf'):
+    def __init__(self, in_ch: int, out_ch: int, kernel_size: int = 3, dilation: int = 1, conv: str = 'DHiF'):
         super().__init__()
 
         padding = kernel_size // 2 if dilation == 1 else dilation
-        if conv == 'Dyf':
-            self.conv = DyfConv(in_ch, out_ch, kernel_size, padding=padding, dilation=dilation, bias=False)
+        if conv == 'DHiF':
+            self.conv = DHiF(in_ch, out_ch, kernel_size, padding=padding, dilation=dilation, bias=False)
         elif conv == 'WTC':
             if in_ch == out_ch:
                 self.conv = WTConv2d(in_ch, out_ch, kernel_size, bias=False)
@@ -59,7 +59,7 @@ class DownConvBNReLU(ConvBNReLU):
 
 class DownConvBNReLU_D(ConvBNReLU_D):
 
-    def __init__(self, in_ch: int, out_ch: int, kernel_size: int = 3, dilation: int = 1, flag: bool = True, conv: str = 'Dyf'):
+    def __init__(self, in_ch: int, out_ch: int, kernel_size: int = 3, dilation: int = 1, flag: bool = True, conv: str = 'DHiF'):
         super().__init__(in_ch, out_ch, kernel_size, dilation, conv)
         self.down_flag = flag
 
