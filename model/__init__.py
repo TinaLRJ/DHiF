@@ -1,9 +1,6 @@
 from model.Unet.model_Unet import U_Net as Unet
-from model.ACM.model_ALCnet import ASKCResNetFPN as ALCNet
-from model.ACM.model_ACM import ASKCResUNet
 from model.DNANet.model_DNANet import DNANet
 from model.ISNet.model_ISNet import ISNet
-from model.RISTDnet.model_RISTDnet import RISTDnet
 from model.MSHNet.MSHNet import MSHNet
 from model.RDIAN.model_RDIAN import RDIAN
 from model.ILNet.ilnet import ILNet_M as ILNet
