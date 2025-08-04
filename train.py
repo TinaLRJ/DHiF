@@ -13,8 +13,7 @@ os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 
 parser = argparse.ArgumentParser(description="PyTorch BasicIRSTD train")
 parser.add_argument("--model_names", default=['MTU'], type=list,
-                    help="model_name: 'ACM', 'ALCNet', 'DNANet', 'ISNet', 'UIUNet', 'RDIAN', 'ISTDU-Net', 'U-Net', "
-                         "'RISTDnet', 'SCTransNet', 'MTU', 'MSH', 'RPCANet', 'APT', 'ILNet', 'MAF', 'DCANet', 'IRGraphormer' ")
+                    help="model_name: 'DNANet', 'ISNet', 'UIUNet', 'RDIAN', 'U-Net', 'SCTransNet', 'MTU', 'MSH', 'APT', 'ILNet'")
 parser.add_argument("--conv", default='DHiF', type=str, help="convolution types: usual, DHiF, WTC, SDC, PC, FD, Ref")
 parser.add_argument("--dataset_names", default=['NUAA-SIRST'], type=list,
                     help="dataset_name: 'NUAA-SIRST', 'IRSTD-1K', 'SIRST3', 'NUDT-SIRST-Sea'")
