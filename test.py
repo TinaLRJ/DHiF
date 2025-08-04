@@ -11,14 +11,13 @@ import time
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 parser = argparse.ArgumentParser(description="PyTorch BasicIRSTD test") # ['ACM', 'ALCNet', 'DNANet', 'UIUNet', 'RDIAN', 'ISTDU-Net']
 parser.add_argument("--model_names", default=['DNANet'], type=list,
-                    help="model_name: 'ACM', 'ALCNet', 'DNANet', 'ISNet', 'UIUNet', 'RDIAN', 'ISTDU-Net', 'U-Net', "
-                         "'RISTDnet', 'SCTransNet', 'MTU', 'MSH', 'RPCANet', 'APT', 'ILNet', 'MAF', 'DCANet', 'IRGraphormer' ")
+                    help="model_name: 'DNANet', 'ISNet', 'UIUNet', 'RDIAN', 'U-Net', 'SCTransNet', 'MTU', 'MSH', 'APT', 'ILNet'")
 parser.add_argument("--conv", default='usual', type=str, help="convolution types: usual, DHiF, WTC, SDC, PC, FD, Ref")
 parser.add_argument("--pth_dirs", default=None, type=list, help="log dir, default=None")
 parser.add_argument("--dataset_dir", default='./dataset', type=str, help="train_dataset_dir")
 parser.add_argument("--train_dataset_name", default='IRSTD-1K', type=str, help="train_dataset_name")
 parser.add_argument("--dataset_names", default=['IRSTD-1K'], type=list,
-                    help="dataset_name: 'NUAA-SIRST', 'NUDT-SIRST', 'IRSTD-1K', 'SIRST3', 'NUDT-SIRST-Sea'")
+                    help="dataset_name: 'NUAA-SIRST', 'IRSTD-1K', 'SIRST3', 'NUDT-SIRST-Sea'")
 parser.add_argument("--img_norm_cfg", default=None, type=dict,
                     help="specific a img_norm_cfg, default=None (using img_norm_cfg values of each dataset)")
 
@@ -32,9 +31,6 @@ global opt
 opt = parser.parse_args()
 os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 mark = '_500epoch_usual'
-# mark = '_WTConv'
-# mark = '_DualConvFC-Tanh-light+(23)_500epoch-step50'
-# mark = '_DualConvFC-Tanh-light+(enc0123last)_500epoch-step50'
 
 def test(): 
     test_set = TestSetLoader(opt.dataset_dir, opt.train_dataset_name, opt.test_dataset_name, opt.img_norm_cfg)
